@@ -1,16 +1,21 @@
-import { ReactTinyLink } from 'react-tiny-link'
+function RecipeCard({ recipe, handleDeleteRecipe }) {
 
-function RecipeCard({ recipe }) {
+  const handleDeleteClick = () => {
+    fetch(`/recipes/${recipe.id}`, {
+      method: "DELETE"
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      handleDeleteRecipe(data)
+    })
+  }
+
   return(
     <div>
-      <ReactTinyLink 
-        cardSize="large"
-        showGraphic={true}
-        maxLine={2}
-        minLine={1}
-        url={recipe.link}
-        width="300px"
-      />
+      <h3><a href={recipe.link} target="_blank" rel="noopener noreferrer">{recipe.name}</a></h3>
+      <img src={recipe.image} width="300px" alt={recipe.name}/>
+      <button onClick={handleDeleteClick}>Delete</button>
     </div>
   )
 }
