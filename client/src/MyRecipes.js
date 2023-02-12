@@ -7,12 +7,13 @@ function MyRecipes({ currentUser }) {
   const [link, setLink] = useState("")
   const [image, setImage] = useState("")
   const [cuisine, setCuisine] = useState("")
+  const [filter, setFilter] = useState("All")
 
   useEffect(() => {
     fetch('/recipes')
     .then(res => res.json())
-    .then(recipes => setRecipes(recipes))
-  }, [currentUser.id])
+    .then(recipes => setRecipes(recipes.filter(recipe => recipe.user_id === currentUser.id)))
+  }, [currentUser.id, recipes])
 
   const handleAddRecipe = (newRecipe) => {
     setRecipes([...recipes, newRecipe])
@@ -22,8 +23,18 @@ function MyRecipes({ currentUser }) {
     setRecipes(recipes.filter(recipe => recipe.id !== recipeToDelete.id))
   }
 
+  const filterRecipes = () => {
+    return recipes.filter(recipe => {
+      if (filter === "All") {
+        return true
+      } else {
+        return recipe.cuisine === filter
+      }
+    })
+  }
+
   const eachRecipe = () => {
-    return recipes.filter(recipe => recipe.user_id === currentUser.id).map(recipe =>
+    return filterRecipes().map(recipe =>
       <RecipeCard recipe={recipe} key={recipe.id} handleDeleteRecipe={handleDeleteRecipe}/>
     )
   }
@@ -43,7 +54,11 @@ function MyRecipes({ currentUser }) {
       })
     })
     .then(res => res.json())
-    .then(data => handleAddRecipe(data))
+    .then(handleAddRecipe)
+    setName("")
+    setLink("")
+    setImage("")
+    setCuisine("")
     e.target.reset()
   }
 
@@ -55,7 +70,7 @@ function MyRecipes({ currentUser }) {
         <input type="text" placeholder="Link URL" value={link} onChange={e => setLink(e.target.value)}></input>
         <input type="text" placeholder="Image URL" value={image} onChange={e => setImage(e.target.value)}></input>
         <select onChange={e => setCuisine(e.target.value)}>
-          <option></option>
+          <option>Cuisine:</option>
           <option value="American">American</option>
           <option value="Asian">Asian</option>
           <option value="French">French</option>
@@ -63,8 +78,20 @@ function MyRecipes({ currentUser }) {
           <option value="Mediterranean">Mediterranean</option>
           <option value="Mexican">Mexican/South American</option>
         </select>
-        <button type="submit">Add Recipe</button>
+        <button>Add Recipe</button>
       </form>
+
+      <label>Search By Cuisine: </label>
+      <select onChange={e => setFilter(e.target.value)}>
+        <option value="All">All</option>
+        <option value="American">American</option>
+        <option value="Asian">Asian</option>
+        <option value="French">French</option>
+        <option value="Italian">Italian</option>
+        <option value="Mediterranean">Mediterranean</option>
+        <option value="Mexican">Mexican/South American</option>
+      </select>
+
       {eachRecipe()}
     </div>
   )
