@@ -8,6 +8,12 @@ class RecipesController < ApplicationController
     recipe = Recipe.create(recipe_params)
     render json: recipe, status: :created
   end
+ 
+  def update
+    recipe = Recipe.find(params[:id])
+    recipe.update(recipe_params)
+    render json: recipe, status: :accepted
+  end
 
   def destroy
     recipe = Recipe.find(params[:id])

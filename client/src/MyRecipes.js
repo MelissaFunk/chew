@@ -8,6 +8,9 @@ function MyRecipes({ currentUser }) {
   const [image, setImage] = useState("")
   const [cuisine, setCuisine] = useState("")
   const [filter, setFilter] = useState("All")
+  const [newFilter, setNewFilter] = useState(false)
+  const [madeFilter, setMadeFilter] = useState(false)
+  const [favoriteFilter, setFavoriteFilter] = useState(false)
 
   useEffect(() => {
     fetch('/recipes')
@@ -23,8 +26,62 @@ function MyRecipes({ currentUser }) {
     setRecipes(recipes.filter(recipe => recipe.id !== recipeToDelete.id))
   }
 
-  const filterRecipes = () => {
+  const allClick = () => {
+    setNewFilter(false)
+    setMadeFilter(false)
+    setFavoriteFilter(false)
+  }
+
+  const newClick = () => {
+    setNewFilter(true)
+    setMadeFilter(false)
+    setFavoriteFilter(false)
+  }
+
+  const madeClick = () => {
+    setNewFilter(false)
+    setMadeFilter(true)
+    setFavoriteFilter(false)
+  }
+
+  const favoriteClick = () => {
+    setNewFilter(false)
+    setMadeFilter(false)
+    setFavoriteFilter(true)
+  }
+
+  const newFilterRecipes = () => {
     return recipes.filter(recipe => {
+      if (newFilter === true) {
+        return recipe.status === "new"
+      } else {
+        return true
+      }
+    })
+  }
+
+  const madeFilterRecipes = () => {
+    return newFilterRecipes().filter(recipe => {
+      if (madeFilter === true) {
+        return recipe.status === "made"
+      } else {
+        return true
+      }
+    })
+  }
+
+  const favoriteFilterRecipes = () => {
+    return madeFilterRecipes().filter(recipe => {
+      if (favoriteFilter === true) {
+        return recipe.favorite === true
+      } else {
+        return true
+      }
+    })
+  }
+
+  const filterRecipes = () => {
+    return favoriteFilterRecipes().filter(recipe => {
       if (filter === "All") {
         return true
       } else {
@@ -80,6 +137,11 @@ function MyRecipes({ currentUser }) {
         </select>
         <button>Add Recipe</button>
       </form>
+
+      <button onClick={allClick}>All</button>
+      <button onClick={newClick}>New</button>
+      <button onClick={madeClick}>Made</button>
+      <button onClick={favoriteClick}>Favorites</button>
 
       <label>Search By Cuisine: </label>
       <select onChange={e => setFilter(e.target.value)}>

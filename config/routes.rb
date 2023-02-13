@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  resources :groceries, only: [:index, :create, :update]
   resources :users, only: [:index, :create]
-  resources :recipes, only: [:index, :create, :destroy]
+  resources :recipes, only: [:index, :create, :update, :destroy]
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
