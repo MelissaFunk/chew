@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Item from './Item'
 
 function Groceries({ currentUser }) {
   const [groceries, setGroceries] = useState([])
@@ -23,20 +24,18 @@ function Groceries({ currentUser }) {
       .then(res => res.json())
       .then(data => console.log(data))
       setItem("")
-    }
+  }
   
   const eachItem = () => {
     return groceries.map(grocery =>
-      <div key={grocery.id}>
-        <p>{grocery.items}</p>
-        <button>Delete</button>
-      </div>
+      <Item grocery={grocery} key={grocery.id}/>
     )
   }
   
   return(
     <div>
       <h1>Groceries</h1>
+      <a href="https://www.instacart.com/store" target="_blank" rel="noopener noreferrer">Instacart</a>
       <form onSubmit={addGroceries}>
         <input type="text" value={item} placeholder="Add Grocery Item" onChange={e => setItem(e.target.value)}></input>
         <button>Add Item</button>

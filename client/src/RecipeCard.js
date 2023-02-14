@@ -1,11 +1,11 @@
-function RecipeCard({ recipe, handleDeleteRecipe }) {
+function RecipeCard({ recipe }) {
 
   const handleDeleteClick = () => {
     fetch(`/recipes/${recipe.id}`, {
       method: "DELETE"
     })
     .then(res => res.json())
-    .then(handleDeleteRecipe)
+    .then(data => console.log(data))
   }
 
   const handleMadeClick = () => {

@@ -18,14 +18,6 @@ function MyRecipes({ currentUser }) {
     .then(recipes => setRecipes(recipes.filter(recipe => recipe.user_id === currentUser.id)))
   }, [currentUser.id, recipes])
 
-  const handleAddRecipe = (newRecipe) => {
-    setRecipes([...recipes, newRecipe])
-  }
-
-  const handleDeleteRecipe = (recipeToDelete) => {
-    setRecipes(recipes.filter(recipe => recipe.id !== recipeToDelete.id))
-  }
-
   const allClick = () => {
     setNewFilter(false)
     setMadeFilter(false)
@@ -92,7 +84,7 @@ function MyRecipes({ currentUser }) {
 
   const eachRecipe = () => {
     return filterRecipes().map(recipe =>
-      <RecipeCard recipe={recipe} key={recipe.id} handleDeleteRecipe={handleDeleteRecipe}/>
+      <RecipeCard recipe={recipe} key={recipe.id} />
     )
   }
 
@@ -111,7 +103,7 @@ function MyRecipes({ currentUser }) {
       })
     })
     .then(res => res.json())
-    .then(handleAddRecipe)
+    .then(data => console.log(data))
     setName("")
     setLink("")
     setImage("")

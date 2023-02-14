@@ -22,9 +22,9 @@ function App() {
     <div>
       {currentUser.username ? <Navbar setCurrentUser={setCurrentUser}/> : null}
       <Switch>
-        <Route exact path="/"><Login setCurrentUser={setCurrentUser}/></Route>
+        <Route exact path="/">{currentUser.name ? <MyRecipes /> : <Login setCurrentUser={setCurrentUser}/>}</Route>
         <Route exact path="/my-recipes"><MyRecipes currentUser={currentUser}/></Route>
-        <Route exact path="/planner"><Planner /></Route>
+        <Route exact path="/planner"><Planner currentUser={currentUser}/></Route>
         <Route exact path="/groceries"><Groceries currentUser={currentUser}/></Route>
       </Switch>
     </div>

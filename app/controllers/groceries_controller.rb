@@ -9,10 +9,10 @@ class GroceriesController < ApplicationController
     render json: grocery, status: :created
   end
 
-  def update
+  def destroy
     grocery = Grocery.find(params[:id])
-    grocery.update(params.permit(:items))
-    render json: grocery, status: :accepted
+    grocery.destroy
+    head :no_content
   end
 
 end
