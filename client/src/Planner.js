@@ -65,7 +65,7 @@ function Planner({ currentUser }) {
   }
 
   return(
-    <div>
+    <div className="planner-div">
       <h1>Planner</h1>
       <table>
         <thead>

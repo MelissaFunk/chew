@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { useHistory } from 'react-router'
 
 function Navbar({ setCurrentUser }) {
@@ -18,9 +17,6 @@ function Navbar({ setCurrentUser }) {
 
   return(
     <div>
-      <Link to="/my-recipes"><h3>My Recipes</h3></Link>
-      <Link to="/planner"><h3>Planner</h3></Link>
-      <Link to="/groceries"><h3>Groceries</h3></Link>
       <button onClick={handleLogout}>Logout</button>
     </div>
   )

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :groceries, only: [:index, :create, :destroy]
   resources :users, only: [:index, :create]
   resources :recipes, only: [:index, :create, :update, :destroy]
 
