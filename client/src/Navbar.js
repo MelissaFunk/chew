@@ -16,7 +16,9 @@ function Navbar({ setCurrentUser }) {
   }
 
   return(
-    <div>
+    <div className="navbar">
+      <img src="https://i.imgur.com/83mNXhn.png" alt="logo"/>
+      <h1>Chew</h1>
       <button onClick={handleLogout}>Logout</button>
     </div>
   )

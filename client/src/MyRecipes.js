@@ -142,7 +142,7 @@ function MyRecipes({ currentUser }) {
   }
 
   return(
-    <div>
+    <div className="my-recipes">
       <h1>My Recipes</h1>
       <form onSubmit={addRecipe}>
         <input type="text" placeholder="Name" value={name} onChange={e => setName(e.target.value)}></input>

@@ -1,4 +1,4 @@
-function RecipeCard({ recipe, cardStyle }) {
+function RecipeCard({ recipe }) {
 
   const handleDeleteClick = () => {
     fetch(`/recipes/${recipe.id}`, {
@@ -43,9 +43,6 @@ function RecipeCard({ recipe, cardStyle }) {
       <h3><a href={recipe.link} target="_blank" rel="noopener noreferrer">{recipe.name}</a></h3>
       <img src={recipe.image} alt={recipe.name} width="300px" height="300px"/>
       <br></br>
-      {recipe.status === "new" ? <button onClick={handleMadeClick}>Made</button> : null}
-      {recipe.favorite === null ? <button onClick={handleFavoriteClick}>Favorite</button> : null}
-      <button onClick={handleDeleteClick}>Delete</button>
 
       <select onChange={handleAddDateClick}>
         <option>Select Date:</option>
@@ -57,6 +54,10 @@ function RecipeCard({ recipe, cardStyle }) {
         <option value="Fri">Friday</option>
         <option value="Sat">Saturday</option>
       </select>
+
+      {recipe.status === "new" ? <button onClick={handleMadeClick}>Made</button> : null}
+      {recipe.favorite === null ? <button onClick={handleFavoriteClick}>Favorite</button> : null}
+      <button onClick={handleDeleteClick}>Delete</button>
     </div>
   )
 }

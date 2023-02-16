@@ -22,7 +22,7 @@ function Planner({ currentUser }) {
       setFri(recipes.filter(recipe => recipe.user_id === currentUser.id).filter(recipe => recipe.date === "Fri"))
       setSat(recipes.filter(recipe => recipe.user_id === currentUser.id).filter(recipe => recipe.date === "Sat"))
     })
-  }, [currentUser.id])
+  }, [currentUser.id, sun, mon, tues, wed, thurs, fri, sat])
 
   const eachSun = () => {
     return sun.map(recipe =>

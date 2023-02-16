@@ -12,6 +12,53 @@ code {
     monospace;
 }
 
+/* NAVBAR */
+.navbar {
+  position: relative;
+  top: -10px;
+  left: -10px;
+  right: -10px;
+  width: 101.3%;
+  height: 60px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.navbar img {
+  position: absolute;
+  left: 50px;
+  width: 60px;
+  height: auto;
+}
+
+.navbar h1 {
+  position: absolute;
+  left: 120px;
+  top: 18px;
+  font-size: 40px
+}
+
+.navbar button {
+  display: inline-block;
+  position: relative;
+  top: 20px;
+  left: 580px;
+  width: 105px;
+  height: 40px;
+  font-size: large;
+  color: #e0fbfc;
+  background: #ee6c4d;
+  border: none;
+  border-radius: 5px
+}
+
+/* CAROUSEL/RECIPES */
+
+.my-recipes {
+  margin-top: 120px
+}
+
 .carousel-div {
   margin: auto;
   width: 75%
